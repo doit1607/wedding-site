@@ -15,7 +15,7 @@ window.WEDDING = {
     name: 'bà chã hơm',
     fullName: 'bà chã hơm',
     bio: 'Giáo viên Tiếng Anh, yêu hoa, yêu mèo và yêu anh.',
-    photo: 'images/con_gian.jpg',
+    photo: 'images/avatar-con-gian-cute-10-1-300x290.jpg',
   },
 
   // Mốc đếm ngược ở đầu trang (thường là giờ làm lễ chính).
