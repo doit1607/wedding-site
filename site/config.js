@@ -9,7 +9,7 @@ window.WEDDING = {
     name: 'Mạnh Dũng',
     fullName: 'Trần Mạnh Dũng',
     bio: 'Kỹ sư phần mềm, mê cà phê sáng và những chuyến đi xa.',
-    photo: '',
+    photo: '1790436208494_495983531239816737_7620484263016296962_d2be557541a641ca4b28c449e271ed3a.jpg',
   },
   bride: {
     name: '...',
