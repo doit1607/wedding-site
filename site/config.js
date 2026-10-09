@@ -12,10 +12,10 @@ window.WEDDING = {
     photo: 'images/chu-re.jpg',
   },
   bride: {
-    name: '...',
-    fullName: '...',
+    name: 'bà chã hơm',
+    fullName: 'bà chã hơm',
     bio: 'Giáo viên Tiếng Anh, yêu hoa, yêu mèo và yêu anh.',
-    photo: '',
+    photo: 'images/con_gian.jpg',
   },
 
   // Mốc đếm ngược ở đầu trang (thường là giờ làm lễ chính).
