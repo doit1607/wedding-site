@@ -68,7 +68,7 @@ window.WEDDING = {
       start: '2026-12-20T10:00:00+07:00',
       end: '2026-12-20T11:30:00+07:00',
       place: 'Tư gia nhà trai',
-      address: '36 xóm 3, thôn Lưu Thượng, xã Phượng Dực, Tp. Hà Nội',
+      address: 'Số 36 xóm 3, thôn Lưu Thượng, xã Phượng Dực, Tp. Hà Nội',
     },
     // {
     //   title: 'Tiệc cưới',
