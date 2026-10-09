@@ -1,0 +1,58 @@
+# ============================================================
+# Mỗi lần push lên main: chạy test → test qua thì đưa thư mục site/
+# lên GitHub Pages. Test hỏng thì KHÔNG deploy, trang cũ vẫn giữ nguyên.
+# ============================================================
+name: Deploy Pages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+# Không cho 2 lần deploy chạy chồng nhau; cũng không huỷ lần đang chạy dở.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Tải code về runner
+        uses: actions/checkout@v7
+
+      - name: Cài Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      - name: Chạy test
+        run: npm test
+
+      # Không có bước build: site/ chạy thẳng trên trình duyệt nên đóng gói luôn.
+      - name: Đóng gói site/ thành artifact cho Pages
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: site
+
+  deploy:
+    name: Deploy
+    needs: test
+    # Pull request chỉ chạy test, chỉ khi push lên main mới deploy.
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy lên GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
