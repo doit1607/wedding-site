@@ -1,7 +1,7 @@
 // ============================================================
 // Nội dung trang cưới: muốn đổi tên, ngày, ảnh... chỉ cần sửa file này.
 // - Thời gian ghi kèm múi giờ +07:00 để ai mở trang ở đâu cũng thấy giờ Việt Nam.
-// - Ảnh: chép vào site/wedding/images/ rồi ghi 'images/ten-anh.jpg'.
+// - Ảnh: chép vào site/images/ rồi ghi 'images/ten-anh.jpg'.
 //   Để trống ('') thì trang hiện ô màu thay cho ảnh.
 // ============================================================
 window.WEDDING = {
@@ -9,7 +9,7 @@ window.WEDDING = {
     name: 'Mạnh Dũng',
     fullName: 'Trần Mạnh Dũng',
     bio: 'Kỹ sư phần mềm, mê cà phê sáng và những chuyến đi xa.',
-    photo: '1790436208494_495983531239816737_7620484263016296962_d2be557541a641ca4b28c449e271ed3a.jpg',
+    photo: 'images/chu-re.jpg',
   },
   bride: {
     name: '...',
