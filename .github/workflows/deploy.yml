@@ -1,8 +1,13 @@
 # ============================================================
-# Mỗi lần push lên main: chạy test → test qua thì đưa thư mục site/
-# lên GitHub Pages. Test hỏng thì KHÔNG deploy, trang cũ vẫn giữ nguyên.
+# Pull request: chỉ chạy test.
+# Push lên main: chạy test → test qua thì đưa thư mục site/ lên Cloudflare Pages.
+# Test hỏng thì KHÔNG deploy, trang cũ vẫn giữ nguyên.
+#
+# Secrets cần có trong repo (Settings → Secrets and variables → Actions):
+#   CLOUDFLARE_API_TOKEN   token chỉ có quyền "Cloudflare Pages: Edit"
+#   CLOUDFLARE_ACCOUNT_ID  ID tài khoản Cloudflare
 # ============================================================
-name: Deploy Pages
+name: Deploy
 
 on:
   push:
@@ -10,11 +15,6 @@ on:
   pull_request:
     branches: [main]
   workflow_dispatch:
-
-# Không cho 2 lần deploy chạy chồng nhau; cũng không huỷ lần đang chạy dở.
-concurrency:
-  group: pages
-  cancel-in-progress: false
 
 jobs:
   test:
@@ -34,25 +34,42 @@ jobs:
       - name: Chạy test
         run: npm test
 
-      # Không có bước build: site/ chạy thẳng trên trình duyệt nên đóng gói luôn.
-      - name: Đóng gói site/ thành artifact cho Pages
-        uses: actions/upload-pages-artifact@v5
-        with:
-          path: site
-
   deploy:
     name: Deploy
     needs: test
-    # Pull request chỉ chạy test, chỉ khi push lên main mới deploy.
-    if: github.event_name != 'pull_request'
+    # Chỉ deploy code của nhánh main. Kiểm tra theo nhánh (không theo loại sự kiện)
+    # để cả nút "Run workflow" chạy từ nhánh khác cũng không đẩy được lên production.
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
-      pages: write
-      id-token: write
+      contents: read
+    # Đặt ở cấp job (không phải cấp workflow) để chỉ các lần deploy xếp hàng với nhau;
+    # test của pull request không chen vào hàng chờ và làm huỷ lần deploy đang chờ.
+    concurrency:
+      group: production
+      cancel-in-progress: false
     environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      name: production
+      # Project tên "wedding-party", nhưng subdomain đó đã có người dùng
+      # nên Cloudflare cấp địa chỉ có thêm đuôi "-cmq".
+      url: https://wedding-party-cmq.pages.dev
     steps:
-      - name: Deploy lên GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v5
+      - name: Tải code về runner
+        uses: actions/checkout@v7
+
+      - name: Cài Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      # Ghim major version (@4): bản wrangler mới có thay đổi lớn cũng không làm hỏng
+      # deploy bất ngờ. --branch=main khớp production branch của project → lên bản chính.
+      - name: Deploy lên Cloudflare Pages
+        run: >-
+          npx --yes wrangler@4 pages deploy site
+          --project-name=wedding-party
+          --branch=main
+          --commit-hash=${{ github.sha }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
