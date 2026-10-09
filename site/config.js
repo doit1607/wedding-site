@@ -1,20 +1,20 @@
 // ============================================================
 // Nội dung trang cưới: muốn đổi tên, ngày, ảnh... chỉ cần sửa file này.
 // - Thời gian ghi kèm múi giờ +07:00 để ai mở trang ở đâu cũng thấy giờ Việt Nam.
-// - Ảnh: chép vào site/images/ rồi ghi 'images/ten-anh.jpg'.
+// - Ảnh: chép vào site/wedding/images/ rồi ghi 'images/ten-anh.jpg'.
 //   Để trống ('') thì trang hiện ô màu thay cho ảnh.
 // ============================================================
 window.WEDDING = {
   groom: {
-    name: 'Anh Tuấn',
-    fullName: 'Nguyễn Anh Tuấn',
+    name: 'Mạnh Dũng',
+    fullName: 'Trần Mạnh Dũng',
     bio: 'Kỹ sư phần mềm, mê cà phê sáng và những chuyến đi xa.',
     photo: '',
   },
   bride: {
-    name: 'Ngọc Lan',
-    fullName: 'Trần Ngọc Lan',
-    bio: 'Cô giáo tiểu học, yêu hoa, yêu mèo và yêu anh.',
+    name: '...',
+    fullName: '...',
+    bio: 'Giáo viên Tiếng Anh, yêu hoa, yêu mèo và yêu anh.',
     photo: '',
   },
 
@@ -61,22 +61,22 @@ window.WEDDING = {
       start: '2026-12-20T08:00:00+07:00',
       end: '2026-12-20T09:30:00+07:00',
       place: 'Tư gia nhà gái',
-      address: '123 Đường ABC, Phường XYZ, TP. Hồ Chí Minh',
+      address: '...',
     },
     {
       title: 'Lễ Thành Hôn',
       start: '2026-12-20T10:00:00+07:00',
       end: '2026-12-20T11:30:00+07:00',
       place: 'Tư gia nhà trai',
-      address: '456 Đường DEF, Phường UVW, TP. Hồ Chí Minh',
+      address: '36 xóm 3, thôn Lưu Thượng, xã Phượng Dực, Tp. Hà Nội',
     },
-    {
-      title: 'Tiệc cưới',
-      start: '2026-12-20T18:00:00+07:00',
-      end: '2026-12-20T21:00:00+07:00',
-      place: 'Nhà hàng tiệc cưới ABC',
-      address: '789 Đường GHI, Quận 1, TP. Hồ Chí Minh',
-    },
+    // {
+    //   title: 'Tiệc cưới',
+    //   start: '2026-12-20T18:00:00+07:00',
+    //   end: '2026-12-20T21:00:00+07:00',
+    //   place: 'Nhà hàng tiệc cưới ABC',
+    //   address: '789 Đường GHI, Quận 1, TP. Hồ Chí Minh',
+    // },
   ],
 
   // Điền accountNo thì trang tự tạo mã QR chuyển khoản (VietQR).
@@ -84,17 +84,17 @@ window.WEDDING = {
   gifts: [
     {
       label: 'Mừng cưới chú rể',
-      bank: 'Vietcombank',
-      bankId: 'VCB',
-      accountNo: '',
-      accountName: 'NGUYEN ANH TUAN',
+      bank: 'MBbank',
+      bankId: 'MB',
+      accountNo: '0975099058',
+      accountName: 'Tran Manh Dung',
     },
     {
       label: 'Mừng cưới cô dâu',
       bank: 'Techcombank',
       bankId: 'TCB',
       accountNo: '',
-      accountName: 'TRAN NGOC LAN',
+      accountName: '...',
     },
   ],
 
